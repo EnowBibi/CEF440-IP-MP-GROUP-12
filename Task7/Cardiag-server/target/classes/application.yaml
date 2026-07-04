@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: CarDiag
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cardiag
+    username: pcodes
+    password: pcodes
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 100
+          batch_versioned_data: true
+        order_updates: true
+        order_inserts: true
+    database: PostgreSQL
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 813841474406-mqcd2599t1vm5q0g26g7l0afjm2a7ulf.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - profile
+              - email
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+springdoc:
+  default-produces-media-type: application/json
+
+application:
+  file:
+    uploads:
+      media-output-path: ./uploads
+  embedding:
+    enabled: false
+  ingestion:
+    enabled: false
+    json-path: classpath:fault.json
+
+  sync:
+    db-version: 1
+  security:
+    jwt:
+      secret: 8wWYjFpCy6Otp48mdnWDgkTjt5IjPPJqAKpqKhzAEZM=
+      expiration: 86400000 #1day
+      refresh-token:
+        expiration: 604800000 #7 days
+  openai:
+    api:
+      key: ${OPENAI_API_KEY}
+      base-url: https://api.openai.com/v1
+      vision-model: gpt-4o
+      audio-model: gpt-4o-audio-preview
+      embedding-model: text-embedding-3-small
+      max-token: 1024
+  voyage:
+    ai:
+      api-key: ${VOYAGE_API_KEY}
+      url: https://api.voyageai.com
+      model: voyage-3
+  youtube:
+    api:
+      key: ${YOUTUBE_API_KEY}
+      base-url: https://www.googleapis.com
+      results-per-fault: 3
+      cache-ttl-days: 7
+  oauth2:
+    # Fallback when the client does not supply (an allowlisted) redirect_uri.
+    redirect-url: ${OAUTH2_REDIRECT_URL:http://localhost:8081/oauth2/redirect}
+    # Where the OAuth2 handlers are allowed to send the user back to (with the JWT).
+    # Includes the native app deep link and the Expo web dev origins.
+    authorized-redirect-uris: cardiagfrontend://oauth2/redirect,http://localhost:8081/oauth2/redirect,http://localhost:19006/oauth2/redirect,http://localhost:3000/oauth2/redirect

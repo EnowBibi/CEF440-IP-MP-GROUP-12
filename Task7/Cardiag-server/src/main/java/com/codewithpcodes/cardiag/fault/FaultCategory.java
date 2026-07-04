@@ -1,0 +1,29 @@
+package com.codewithpcodes.cardiag.fault;
+
+public enum FaultCategory {
+    ENGINE,
+    TRANSMISSION,
+    FUEL_SYSTEM,
+    EMISSIONS,
+    AIR_INTAKE,
+    THROTTLE,
+    ENGINE_COOLING,
+    SENSORS,
+    PCM_ECM,
+    ELECTRICAL,
+    CRUISE_CONTROL,
+    ABS,
+    BRAKES,
+    STABILITY_CONTROL,
+    TRACTION_CONTROL,
+    STEERING,
+    SUSPENSION,
+    DRIVETRAIN,
+    HVAC,
+    BODY_ELECTRICAL,
+    SAFETY,
+    SECURITY,
+    INFOTAINMENT,
+    NETWORK_COMMUNICATION,
+    UNKNOWN, CHASSIS
+}
